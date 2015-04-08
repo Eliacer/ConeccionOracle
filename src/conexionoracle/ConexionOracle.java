@@ -5,17 +5,32 @@
  */
 package conexionoracle;
 
+import java.sql.ResultSet;
+import java.sql.Statement;
+
 /**
  *
  * @author alumno04
  */
 public class ConexionOracle {
-
-    /**
-     * @param args the command line arguments
-     */
     public static void main(String[] args) {
-        // TODO code application logic here
+        if (Conexion.conectar()== null) {
+            System.out.println("La conexion fallo!!!..");
+        } else {
+            System.out.println("Conexion exitosa");
+
+            try {
+                Statement st = Conexion.conectar().createStatement();
+                ResultSet rs = st.executeQuery("select * from persona");
+                while (rs.next()) {                    
+                    System.out.println("id_persona: "+rs.getInt("id_persona"));
+                    System.out.println("nombre: "+rs.getInt("nombre"));
+                    System.out.println("Ap_paterno: "+rs.getInt("ap_paterno"));
+                    
+                }
+            } catch (Exception e) {
+            }
+        }
     }
     
 }
